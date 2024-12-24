@@ -1,235 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
-  <script>
-    var _hmt = _hmt || [];
-    (function () {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c923daf3182a4b0ce01878475080aadc";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <title>❤❤❤</title>
-  </head>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-    }
+    <title>圣诞祝福</title>
+    <meta charset="utf-8" />
+    <style>
+      /* 设置整个页面的基本样式 */
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: #000; /* 黑色背景 */
+        overflow: hidden; /* 隐藏溢出内容 */
+        position: relative; /* 使子元素可以相对于此元素定位 */
+      }
 
-    canvas {
-      position: absolute;
-    }
-  </style>
+      /* 应用程序容器的样式 */
+      .app {
+        text-align: center; /* 文本居中对齐 */
+        margin: 10px; /* 外边距 */
+      }
+
+      /* 圣诞树的样式 */
+      .christmas-tree {
+        position: absolute; /* 绝对定位 */
+        margin: 0; /* 没有外边距 */
+        width: 200px; /* 宽度 */
+        height: 300px; /* 高度 */
+        top: 50%; /* 垂直居中 */
+        left: 50%; /* 水平居中 */
+        transform: translate(-50%, -50%); /* 精确居中 */
+      }
+
+      /* 圣诞树枝干的通用样式 */
+      .christmas-tree .branch {
+        position: absolute; /* 绝对定位 */
+        background-color: #008000; /* 绿色背景 */
+        border-radius: 50% 50% 0 0; /* 上半部分圆角 */
+      }
+
+      /* 顶部枝干的样式 */
+      .christmas-tree .branch.top {
+        width: 160px; /* 宽度 */
+        height: 100px; /* 高度 */
+        top: 0; /* 从顶部开始 */
+        left: 20px; /* 从左边偏移 */
+      }
+
+      /* 中部枝干的样式 */
+      .christmas-tree .branch.middle {
+        width: 200px; /* 宽度 */
+        height: 120px; /* 高度 */
+        top: 100px; /* 从顶部偏移 */
+        left: 0; /* 从左边开始 */
+      }
+
+      /* 底部枝干的样式 */
+      .christmas-tree .branch.bottom {
+        width: 240px; /* 宽度 */
+        height: 140px; /* 高度 */
+        top: 220px; /* 从顶部偏移 */
+        left: -20px; /* 从左边偏移 */
+      }
+
+      /* 圣诞树树干的样式 */
+      .christmas-tree .trunk {
+        width: 40px; /* 宽度 */
+        height: 80px; /* 高度 */
+        background-color: #8b4513; /* 棕色背景 */
+        position: absolute; /* 绝对定位 */
+        bottom: 0; /* 从底部开始 */
+        left: 80px; /* 从左边偏移 */
+        border-radius: 5px; /* 圆角 */
+      }
+
+      /* 圣诞树星星的样式 */
+      .christmas-tree .star {
+        position: absolute; /* 绝对定位 */
+        top: -20px; /* 从顶部偏移 */
+        left: 80px; /* 从左边偏移 */
+        width: 40px; /* 宽度 */
+        height: 40px; /* 高度 */
+        background-color: gold; /* 金色背景 */
+        clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+        ); /* 星星形状 */
+        animation: star-twinkle 2s infinite alternate; /* 闪烁动画 */
+      }
+
+      /* 圣诞树装饰物的样式 */
+      .christmas-tree .ornament {
+        position: absolute; /* 绝对定位 */
+        width: 20px; /* 宽度 */
+        height: 20px; /* 高度 */
+        background-color: red; /* 红色背景 */
+        border-radius: 50%; /* 圆形 */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* 发光效果 */
+        animation: ornament-twinkle 2s infinite alternate; /* 闪烁动画 */
+      }
+
+      /* 星星闪烁动画 */
+      @keyframes star-twinkle {
+        0% {
+          transform: scale(1); /* 初始大小 */
+        }
+        100% {
+          transform: scale(1.2); /* 放大 */
+        }
+      }
+
+      /* 装饰物闪烁动画 */
+      @keyframes ornament-twinkle {
+        0% {
+          transform: scale(1); /* 初始大小 */
+        }
+        100% {
+          transform: scale(1.2); /* 放大 */
+        }
+      }
+
+      /* 雪花效果 */
+      .snowflake {
+        position: absolute; /* 绝对定位 */
+        width: 10px; /* 宽度 */
+        height: 10px; /* 高度 */
+        background-color: white; /* 白色背景 */
+        border-radius: 50%; /* 圆形 */
+        opacity: 0.8; /* 透明度 */
+        animation: fall linear infinite; /* 下落动画 */
+      }
+
+      /* 雪花下落动画 */
+      @keyframes fall {
+        0% {
+          top: -10px; /* 从顶部开始 */
+          opacity: 0.8; /* 透明度 */
+        }
+        100% {
+          top: 100vh; /* 下落到屏幕底部 */
+          opacity: 0; /* 透明度逐渐消失 */
+        }
+      }
+
+      /* 消息文本的样式 */
+      .message {
+        position: absolute; /* 绝对定位 */
+        top: 40%; /* 从顶部偏移 */
+        left: 50%; /* 从左边偏移 */
+        transform: translate(-50%, -50%); /* 精确居中 */
+        color: white; /* 白色文字 */
+        font-size: 48px; /* 字体大小 */
+        font-family: Arial, sans-serif; /* 字体 */
+        text-shadow: 0 0 10px white; /* 发光效果 */
+        animation: fadeInOut 4s infinite; /* 渐隐渐现动画 */
+      }
+
+      /* 消息文本渐隐渐现动画 */
+      @keyframes fadeInOut {
+        0%,
+        100% {
+          opacity: 0; /* 完全透明 */
+        }
+        50% {
+          opacity: 1; /* 完全不透明 */
+        }
+      }
+    </style>
+  </head>
 
   <body>
-    <canvas></canvas>
-    <canvas></canvas>
-    <canvas></canvas>
+    <div class="app">
+      <div class="christmas-tree">
+        <div class="branch top"></div>
+        <!-- 顶部枝干 -->
+        <div class="branch middle"></div>
+        <!-- 中部枝干 -->
+        <div class="branch bottom"></div>
+        <!-- 底部枝干 -->
+        <div class="trunk"></div>
+        <!-- 树干 -->
+        <div class="star"></div>
+        <!-- 星星 -->
+        <div class="ornament" style="top: 60px; left: 60px"></div>
+        <!-- 装饰物1 -->
+        <div class="ornament" style="top: 100px; left: 140px"></div>
+        <!-- 装饰物2 -->
+        <div class="ornament" style="top: 140px; left: 100px"></div>
+        <!-- 装饰物3 -->
+        <div class="ornament" style="top: 180px; left: 180px"></div>
+        <!-- 装饰物4 -->
+        <div class="ornament" style="top: 220px; left: 20px"></div>
+        <!-- 装饰物5 -->
+      </div>
+    </div>
+
+    <div class="message">圣诞快乐！</div>
+    <!-- 消息文本 -->
 
     <script>
-      function GetRequest() {
-        var url = decodeURI(location.search); //获取url中"?"符后的字串
-        var theRequest = new Object();
-        if (url.indexOf("?") != -1) {
-          var str = url.substr(1);
-          strs = str.split("&");
-          for (var i = 0; i < strs.length; i++) {
-            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-          }
-        }
-        return theRequest;
-      }
-      class Shard {
-        constructor(x, y, hue) {
-          this.x = x;
-          this.y = y;
-          this.hue = hue;
-          this.lightness = 50;
-          this.size = 15 + Math.random() * 10;
-          const angle = Math.random() * 2 * Math.PI;
-          const blastSpeed = 1 + Math.random() * 6;
-          this.xSpeed = Math.cos(angle) * blastSpeed;
-          this.ySpeed = Math.sin(angle) * blastSpeed;
-          this.target = getTarget();
-          this.ttl = 100;
-          this.timer = 0;
-        }
-        draw() {
-          ctx2.fillStyle = `hsl(${this.hue}, 100%, ${this.lightness}%)`;
-          ctx2.beginPath();
-          ctx2.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-          ctx2.closePath();
-          ctx2.fill();
-        }
-        update() {
-          if (this.target) {
-            const dx = this.target.x - this.x;
-            const dy = this.target.y - this.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const a = Math.atan2(dy, dx);
-            const tx = Math.cos(a) * 5;
-            const ty = Math.sin(a) * 5;
-            this.size = lerp(this.size, 1.5, 0.05);
-
-            if (dist < 5) {
-              this.lightness = lerp(this.lightness, 100, 0.01);
-              this.xSpeed = this.ySpeed = 0;
-              this.x = lerp(this.x, this.target.x + fidelity / 2, 0.05);
-              this.y = lerp(this.y, this.target.y + fidelity / 2, 0.05);
-              this.timer += 1;
-            } else if (dist < 10) {
-              this.lightness = lerp(this.lightness, 100, 0.01);
-              this.xSpeed = lerp(this.xSpeed, tx, 0.1);
-              this.ySpeed = lerp(this.ySpeed, ty, 0.1);
-              this.timer += 1;
-            } else {
-              this.xSpeed = lerp(this.xSpeed, tx, 0.02);
-              this.ySpeed = lerp(this.ySpeed, ty, 0.02);
-            }
-          } else {
-            this.ySpeed += 0.05;
-            //this.xSpeed = lerp(this.xSpeed, 0, 0.1);
-            this.size = lerp(this.size, 1, 0.05);
-
-            if (this.y > c2.height) {
-              shards.forEach((shard, idx) => {
-                if (shard === this) {
-                  shards.splice(idx, 1);
-                }
-              });
-            }
-          }
-          this.x = this.x + this.xSpeed;
-          this.y = this.y + this.ySpeed;
+      // 创建雪花
+      function createSnowflakes(num) {
+        for (let i = 0; i < num; i++) {
+          const snowflake = document.createElement("div"); // 创建一个 div 元素
+          snowflake.classList.add("snowflake"); // 添加雪花类
+          snowflake.style.left = Math.random() * 100 + "vw"; // 随机水平位置
+          snowflake.style.animationDuration = Math.random() * 2 + 3 + "s"; // 随机动画持续时间
+          document.body.appendChild(snowflake); // 将雪花添加到页面
         }
       }
 
-      class Rocket {
-        constructor() {
-          const quarterW = c2.width / 4;
-          this.x = quarterW + Math.random() * (c2.width - quarterW);
-          this.y = c2.height - 15;
-          this.angle = (Math.random() * Math.PI) / 4 - Math.PI / 6;
-          this.blastSpeed = 6 + Math.random() * 7;
-          this.shardCount = 15 + Math.floor(Math.random() * 15);
-          this.xSpeed = Math.sin(this.angle) * this.blastSpeed;
-          this.ySpeed = -Math.cos(this.angle) * this.blastSpeed;
-          this.hue = Math.floor(Math.random() * 360);
-          this.trail = [];
-        }
-        draw() {
-          ctx2.save();
-          ctx2.translate(this.x, this.y);
-          ctx2.rotate(Math.atan2(this.ySpeed, this.xSpeed) + Math.PI / 2);
-          ctx2.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
-          ctx2.fillRect(0, 0, 5, 15);
-          ctx2.restore();
-        }
-        update() {
-          this.x = this.x + this.xSpeed;
-          this.y = this.y + this.ySpeed;
-          this.ySpeed += 0.1;
-        }
-
-        explode() {
-          for (let i = 0; i < 70; i++) {
-            shards.push(new Shard(this.x, this.y, this.hue));
-          }
-        }
-      }
-
-      console.log(GetRequest("val").val);
-      // INITIALIZATION
-      const [c1, c2, c3] = document.querySelectorAll("canvas");
-      const [ctx1, ctx2, ctx3] = [c1, c2, c3].map((c) => c.getContext("2d"));
-      let fontSize = 200;
-      const rockets = [];
-      const shards = [];
-      const targets = [];
-      const fidelity = 3;
-      let counter = 0;
-      c2.width = c3.width = window.innerWidth;
-      c2.height = c3.height = window.innerHeight;
-      ctx1.fillStyle = "#000";
-      const text = "吕xx，天天开心！";
-      let textWidth = 99999999;
-
-      while (textWidth > window.innerWidth) {
-        ctx1.font = `900 ${fontSize--}px Arial`;
-        textWidth = ctx1.measureText(text).width;
-      }
-
-      c1.width = textWidth;
-      c1.height = fontSize * 1.5;
-      ctx1.font = `900 ${fontSize}px Arial`;
-      ctx1.fillText(text, 0, fontSize);
-      const imgData = ctx1.getImageData(0, 0, c1.width, c1.height);
-      for (let i = 0, max = imgData.data.length; i < max; i += 4) {
-        const alpha = imgData.data[i + 3];
-        const x = Math.floor(i / 4) % imgData.width;
-        const y = Math.floor(i / 4 / imgData.width);
-
-        if (alpha && x % fidelity === 0 && y % fidelity === 0) {
-          targets.push({ x, y });
-        }
-      }
-
-      ctx3.fillStyle = "#FFF";
-      ctx3.shadowColor = "#FFF";
-      ctx3.shadowBlur = 25;
-
-      // ANIMATION LOOP
-      (function loop() {
-        ctx2.fillStyle = "rgba(0, 0, 0, .1)";
-        ctx2.fillRect(0, 0, c2.width, c2.height);
-        //ctx2.clearRect(0, 0, c2.width, c2.height);
-        counter += 1;
-
-        if (counter % 15 === 0) {
-          rockets.push(new Rocket());
-        }
-        rockets.forEach((r, i) => {
-          r.draw();
-          r.update();
-          if (r.ySpeed > 0) {
-            r.explode();
-            rockets.splice(i, 1);
-          }
-        });
-
-        shards.forEach((s, i) => {
-          s.draw();
-          s.update();
-
-          if (s.timer >= s.ttl || s.lightness >= 99) {
-            ctx3.fillRect(s.target.x, s.target.y, fidelity + 1, fidelity + 1);
-            shards.splice(i, 1);
-          }
-        });
-
-        requestAnimationFrame(loop);
-      })();
-
-      // HELPER FUNCTIONS
-      const lerp = (a, b, t) => (Math.abs(b - a) > 0.1 ? a + t * (b - a) : b);
-
-      function getTarget() {
-        if (targets.length > 0) {
-          const idx = Math.floor(Math.random() * targets.length);
-          let { x, y } = targets[idx];
-          targets.splice(idx, 1);
-
-          x += c2.width / 2 - textWidth / 2;
-          y += c2.height / 2 - fontSize / 2;
-
-          return { x, y };
-        }
-      }
+      // 调用函数创建雪花
+      createSnowflakes(100);
     </script>
   </body>
 </html>
