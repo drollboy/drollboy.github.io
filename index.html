@@ -1,227 +1,118 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>圣诞祝福</title>
-    <meta charset="utf-8" />
-    <style>
-      /* 设置整个页面的基本样式 */
-      html,
-      body {
-        width: 100%;
-        height: 100%;
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>趣味知识集锦</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
-        border: 0;
-        background: #000; /* 黑色背景 */
-        overflow: hidden; /* 隐藏溢出内容 */
-        position: relative; /* 使子元素可以相对于此元素定位 */
-      }
+        background-color: #f9f9f9; /* Light Grey */
+        color: #333;
+    }
+    .header, .footer {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+    .content {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff; /* White */
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    h1, h2, h3 {
+        color: #333;
+    }
+    p, ul, ol {
+        line-height: 1.6;
+        color: #555;
+    }
+    a {
+        color: #007BFF; /* Blue */
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .fact-category {
+        padding: 15px;
+        margin: 15px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
 
-      /* 应用程序容器的样式 */
-      .app {
-        text-align: center; /* 文本居中对齐 */
-        margin: 10px; /* 外边距 */
-      }
+<div class="header">
+    <h1>趣味知识集锦</h1>
+    <p>探索世界的奇妙与惊喜</p>
+</div>
 
-      /* 圣诞树的样式 */
-      .christmas-tree {
-        position: absolute; /* 绝对定位 */
-        margin: 0; /* 没有外边距 */
-        width: 200px; /* 宽度 */
-        height: 300px; /* 高度 */
-        top: 50%; /* 垂直居中 */
-        left: 50%; /* 水平居中 */
-        transform: translate(-50%, -50%); /* 精确居中 */
-      }
+<div class="content">
+    <h2>欢迎来到趣味知识集锦！</h2>
+    <p>这里充满了各种各样的有趣信息，从科学到自然，从历史到文化，我们为您准备了一系列丰富的知识点。</p>
 
-      /* 圣诞树枝干的通用样式 */
-      .christmas-tree .branch {
-        position: absolute; /* 绝对定位 */
-        background-color: #008000; /* 绿色背景 */
-        border-radius: 50% 50% 0 0; /* 上半部分圆角 */
-      }
-
-      /* 顶部枝干的样式 */
-      .christmas-tree .branch.top {
-        width: 160px; /* 宽度 */
-        height: 100px; /* 高度 */
-        top: 0; /* 从顶部开始 */
-        left: 20px; /* 从左边偏移 */
-      }
-
-      /* 中部枝干的样式 */
-      .christmas-tree .branch.middle {
-        width: 200px; /* 宽度 */
-        height: 120px; /* 高度 */
-        top: 100px; /* 从顶部偏移 */
-        left: 0; /* 从左边开始 */
-      }
-
-      /* 底部枝干的样式 */
-      .christmas-tree .branch.bottom {
-        width: 240px; /* 宽度 */
-        height: 140px; /* 高度 */
-        top: 220px; /* 从顶部偏移 */
-        left: -20px; /* 从左边偏移 */
-      }
-
-      /* 圣诞树树干的样式 */
-      .christmas-tree .trunk {
-        width: 40px; /* 宽度 */
-        height: 80px; /* 高度 */
-        background-color: #8b4513; /* 棕色背景 */
-        position: absolute; /* 绝对定位 */
-        bottom: 0; /* 从底部开始 */
-        left: 80px; /* 从左边偏移 */
-        border-radius: 5px; /* 圆角 */
-      }
-
-      /* 圣诞树星星的样式 */
-      .christmas-tree .star {
-        position: absolute; /* 绝对定位 */
-        top: -20px; /* 从顶部偏移 */
-        left: 80px; /* 从左边偏移 */
-        width: 40px; /* 宽度 */
-        height: 40px; /* 高度 */
-        background-color: gold; /* 金色背景 */
-        clip-path: polygon(
-          50% 0%,
-          61% 35%,
-          98% 35%,
-          68% 57%,
-          79% 91%,
-          50% 70%,
-          21% 91%,
-          32% 57%,
-          2% 35%,
-          39% 35%
-        ); /* 星星形状 */
-        animation: star-twinkle 2s infinite alternate; /* 闪烁动画 */
-      }
-
-      /* 圣诞树装饰物的样式 */
-      .christmas-tree .ornament {
-        position: absolute; /* 绝对定位 */
-        width: 20px; /* 宽度 */
-        height: 20px; /* 高度 */
-        background-color: red; /* 红色背景 */
-        border-radius: 50%; /* 圆形 */
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* 发光效果 */
-        animation: ornament-twinkle 2s infinite alternate; /* 闪烁动画 */
-      }
-
-      /* 星星闪烁动画 */
-      @keyframes star-twinkle {
-        0% {
-          transform: scale(1); /* 初始大小 */
-        }
-        100% {
-          transform: scale(1.2); /* 放大 */
-        }
-      }
-
-      /* 装饰物闪烁动画 */
-      @keyframes ornament-twinkle {
-        0% {
-          transform: scale(1); /* 初始大小 */
-        }
-        100% {
-          transform: scale(1.2); /* 放大 */
-        }
-      }
-
-      /* 雪花效果 */
-      .snowflake {
-        position: absolute; /* 绝对定位 */
-        width: 10px; /* 宽度 */
-        height: 10px; /* 高度 */
-        background-color: white; /* 白色背景 */
-        border-radius: 50%; /* 圆形 */
-        opacity: 0.8; /* 透明度 */
-        animation: fall linear infinite; /* 下落动画 */
-      }
-
-      /* 雪花下落动画 */
-      @keyframes fall {
-        0% {
-          top: -10px; /* 从顶部开始 */
-          opacity: 0.8; /* 透明度 */
-        }
-        100% {
-          top: 100vh; /* 下落到屏幕底部 */
-          opacity: 0; /* 透明度逐渐消失 */
-        }
-      }
-
-      /* 消息文本的样式 */
-      .message {
-        position: absolute; /* 绝对定位 */
-        top: 40%; /* 从顶部偏移 */
-        left: 50%; /* 从左边偏移 */
-        transform: translate(-50%, -50%); /* 精确居中 */
-        color: white; /* 白色文字 */
-        font-size: 48px; /* 字体大小 */
-        font-family: Arial, sans-serif; /* 字体 */
-        text-shadow: 0 0 10px white; /* 发光效果 */
-        animation: fadeInOut 4s infinite; /* 渐隐渐现动画 */
-      }
-
-      /* 消息文本渐隐渐现动画 */
-      @keyframes fadeInOut {
-        0%,
-        100% {
-          opacity: 0; /* 完全透明 */
-        }
-        50% {
-          opacity: 1; /* 完全不透明 */
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="app">
-      <div class="christmas-tree">
-        <div class="branch top"></div>
-        <!-- 顶部枝干 -->
-        <div class="branch middle"></div>
-        <!-- 中部枝干 -->
-        <div class="branch bottom"></div>
-        <!-- 底部枝干 -->
-        <div class="trunk"></div>
-        <!-- 树干 -->
-        <div class="star"></div>
-        <!-- 星星 -->
-        <div class="ornament" style="top: 60px; left: 60px"></div>
-        <!-- 装饰物1 -->
-        <div class="ornament" style="top: 100px; left: 140px"></div>
-        <!-- 装饰物2 -->
-        <div class="ornament" style="top: 140px; left: 100px"></div>
-        <!-- 装饰物3 -->
-        <div class="ornament" style="top: 180px; left: 180px"></div>
-        <!-- 装饰物4 -->
-        <div class="ornament" style="top: 220px; left: 20px"></div>
-        <!-- 装饰物5 -->
-      </div>
+    <div class="fact-category">
+        <h3>动物王国的秘密</h3>
+        <ul>
+            <li>章鱼有三个心脏，两个为鳃泵血，另一个则负责将富含氧气的血液输送到身体其他部位。</li>
+            <li>蜜蜂在找到花蜜后会通过舞蹈告诉同伴食物的位置。</li>
+            <li>企鹅夫妻每年都会回到同一个地点孵化它们的蛋。</li>
+        </ul>
     </div>
 
-    <div class="message">圣诞快乐！</div>
-    <!-- 消息文本 -->
+    <div class="fact-category">
+        <h3>科学中的惊奇</h3>
+        <ul>
+            <li>人类DNA和香蕉的DNA大约有50%的相似度。</li>
+            <li>水可以在零下几度不结冰，这被称为过冷水现象。</li>
+            <li>光速是目前已知最快的物理速度，约为每秒299,792公里。</li>
+        </ul>
+    </div>
 
-    <script>
-      // 创建雪花
-      function createSnowflakes(num) {
-        for (let i = 0; i < num; i++) {
-          const snowflake = document.createElement("div"); // 创建一个 div 元素
-          snowflake.classList.add("snowflake"); // 添加雪花类
-          snowflake.style.left = Math.random() * 100 + "vw"; // 随机水平位置
-          snowflake.style.animationDuration = Math.random() * 2 + 3 + "s"; // 随机动画持续时间
-          document.body.appendChild(snowflake); // 将雪花添加到页面
-        }
-      }
+    <div class="fact-category">
+        <h3>历史长河的故事</h3>
+        <ul>
+            <li>在中世纪的欧洲，曾经有一段时间猫被认为是女巫的化身，导致了大规模的捕杀，这可能间接地加剧了黑死病的传播。</li>
+            <li>古埃及法老图坦卡蒙的陵墓是在1922年被考古学家霍华德·卡特发现的，里面藏有大量的宝藏。</li>
+            <li>世界上第一台计算机“ENIAC”于1946年在美国宾夕法尼亚大学问世，它重达27吨。</li>
+        </ul>
+    </div>
 
-      // 调用函数创建雪花
-      createSnowflakes(100);
-    </script>
-  </body>
+    <div class="fact-category">
+        <h3>宇宙星空的奥秘</h3>
+        <ul>
+            <li>如果你在太空中大喊，没有人能听到你，因为声音无法在真空中传播。</li>
+            <li>土星并不是唯一拥有环的行星；木星、天王星和海王星也有自己的环系统。</li>
+            <li>银河系是一个棒旋星系，其中包含了大约1000亿颗恒星，太阳只是其中之一。</li>
+        </ul>
+    </div>
+
+    <div class="fact-category">
+        <h3>文化的多样性</h3>
+        <ul>
+            <li>在日本，有一种叫做“森林浴”的活动，人们会在森林中漫步，用这种方式放松身心并促进健康。</li>
+            <li>巴西狂欢节是世界上最著名的节日之一，吸引了来自世界各地的游客。</li>
+            <li>印度的洒红节（Holi）也被称为颜色节，人们在这个节日里互相抛洒彩色粉末以庆祝春天的到来。</li>
+        </ul>
+    </div>
+
+    <p>这只是开始，更多精彩内容即将呈现。请继续关注我们，不要错过任何更新！如果您有任何问题或建议，请随时联系我：<a href="mailto:your-email@example.com">发送邮件</a></p>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 趣味知识集锦. 保留所有权利.</p>
+</div>
+
+</body>
 </html>
