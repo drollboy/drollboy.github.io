@@ -1,118 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>趣味知识集锦</title>
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f9f9f9; /* Light Grey */
-        color: #333;
-    }
-    .header, .footer {
-        background-color: #4CAF50; /* Green */
-        color: white;
-        text-align: center;
-        padding: 20px;
-    }
-    .content {
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 20px;
-        background-color: #ffffff; /* White */
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        border-radius: 8px;
-    }
-    h1, h2, h3 {
-        color: #333;
-    }
-    p, ul, ol {
-        line-height: 1.6;
-        color: #555;
-    }
-    a {
-        color: #007BFF; /* Blue */
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    .fact-category {
-        padding: 15px;
-        margin: 15px 0;
-        border-bottom: 1px solid #ddd;
-    }
-    .footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-</style>
+  <meta charset="UTF-8">
+  <title>排序算法可视化</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="header">
-    <h1>趣味知识集锦</h1>
-    <p>探索世界的奇妙与惊喜</p>
-</div>
-
-<div class="content">
-    <h2>欢迎来到趣味知识集锦！</h2>
-    <p>这里充满了各种各样的有趣信息，从科学到自然，从历史到文化，我们为您准备了一系列丰富的知识点。</p>
-
-    <div class="fact-category">
-        <h3>动物王国的秘密</h3>
-        <ul>
-            <li>章鱼有三个心脏，两个为鳃泵血，另一个则负责将富含氧气的血液输送到身体其他部位。</li>
-            <li>蜜蜂在找到花蜜后会通过舞蹈告诉同伴食物的位置。</li>
-            <li>企鹅夫妻每年都会回到同一个地点孵化它们的蛋。</li>
-        </ul>
+  <div class="container">
+    <div id="controls">
+      <select id="algorithmSelect" onchange="generateNewArray()">
+        <option value="bubble">冒泡排序</option>
+        <option value="quick">快速排序</option>
+        <option value="selection">选择排序</option>
+        <option value="insertion">插入排序</option>
+        <option value="merge">归并排序</option>
+        <option value="shell">希尔排序</option>
+        <option value="heap">堆排序</option>
+      </select>
+      <button id="startBtn" onclick="initSort(document.getElementById('algorithmSelect').value)">开始排序</button>
+      <button onclick="generateNewArray()">生成新数组</button>
     </div>
-
-    <div class="fact-category">
-        <h3>科学中的惊奇</h3>
-        <ul>
-            <li>人类DNA和香蕉的DNA大约有50%的相似度。</li>
-            <li>水可以在零下几度不结冰，这被称为过冷水现象。</li>
-            <li>光速是目前已知最快的物理速度，约为每秒299,792公里。</li>
-        </ul>
-    </div>
-
-    <div class="fact-category">
-        <h3>历史长河的故事</h3>
-        <ul>
-            <li>在中世纪的欧洲，曾经有一段时间猫被认为是女巫的化身，导致了大规模的捕杀，这可能间接地加剧了黑死病的传播。</li>
-            <li>古埃及法老图坦卡蒙的陵墓是在1922年被考古学家霍华德·卡特发现的，里面藏有大量的宝藏。</li>
-            <li>世界上第一台计算机“ENIAC”于1946年在美国宾夕法尼亚大学问世，它重达27吨。</li>
-        </ul>
-    </div>
-
-    <div class="fact-category">
-        <h3>宇宙星空的奥秘</h3>
-        <ul>
-            <li>如果你在太空中大喊，没有人能听到你，因为声音无法在真空中传播。</li>
-            <li>土星并不是唯一拥有环的行星；木星、天王星和海王星也有自己的环系统。</li>
-            <li>银河系是一个棒旋星系，其中包含了大约1000亿颗恒星，太阳只是其中之一。</li>
-        </ul>
-    </div>
-
-    <div class="fact-category">
-        <h3>文化的多样性</h3>
-        <ul>
-            <li>在日本，有一种叫做“森林浴”的活动，人们会在森林中漫步，用这种方式放松身心并促进健康。</li>
-            <li>巴西狂欢节是世界上最著名的节日之一，吸引了来自世界各地的游客。</li>
-            <li>印度的洒红节（Holi）也被称为颜色节，人们在这个节日里互相抛洒彩色粉末以庆祝春天的到来。</li>
-        </ul>
-    </div>
-
-    <p>这只是开始，更多精彩内容即将呈现。请继续关注我们，不要错过任何更新！如果您有任何问题或建议，请随时联系我：<a href="mailto:your-email@example.com">发送邮件</a></p>
-</div>
-
-<div class="footer">
-    <p>&copy; 2025 趣味知识集锦. 保留所有权利.</p>
-</div>
-
+    <canvas id="visualization"></canvas>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
