@@ -22,10 +22,6 @@ button {
   transition: all 0.3s;
 }
 
-.active {
-  background: #1976d2;
-}
-
 button:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
