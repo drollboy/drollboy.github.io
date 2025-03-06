@@ -10,18 +10,18 @@ canvas.width = 800;
 canvas.height = 400;
 
 function generateNewArray() {
-  array = Array.from({length: 40}, () => Math.floor(Math.random() * 380) + 20);
+  array = Array.from({ length: 40 }, () => Math.floor(Math.random() * 380) + 20);
   drawArray();
 }
 
 function drawArray(highlight = []) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const barWidth = canvas.width / array.length;
-  
+
   array.forEach((value, i) => {
     ctx.fillStyle = highlight.includes(i) ? '#ff0000' : '#4CAF50';
     ctx.beginPath();
-    ctx.roundRect(i * barWidth, canvas.height - value, barWidth - 1, value, [4,4,0,0]);
+    ctx.roundRect(i * barWidth, canvas.height - value, barWidth - 1, value, [4, 4, 0, 0]);
     ctx.fill();
   });
 }
@@ -29,10 +29,9 @@ function drawArray(highlight = []) {
 async function initSort(algorithm) {
   if (sorting) return;
   sorting = true;
-  const startTime = performance.now();
-  document.querySelectorAll('#controls button, #controls input').forEach(el => el.disabled = true);
+  document.querySelectorAll('#controls button, #controls input, #controls select').forEach(el => el.disabled = true);
   currentAlgorithm = algorithm;
-  
+
   const algorithms = {
     bubble: bubbleSort,
     quick: quickSort,
@@ -42,13 +41,10 @@ async function initSort(algorithm) {
     shell: shellSort,
     heap: heapSort
   };
-  
+
   await algorithms[algorithm](array);
   drawArray();
-  document.querySelectorAll('#controls button, #controls input').forEach(el => el.disabled = false);
-  const endTime = performance.now();
-  const duration = (endTime - startTime) / 1000;
-  document.getElementById('timeDisplay').textContent = `排序时间: ${duration.toFixed(2)}秒`;
+  document.querySelectorAll('#controls button, #controls input, #controls select').forEach(el => el.disabled = false);
   sorting = false;
 }
 
@@ -70,7 +66,7 @@ async function quickSort(arr, left = 0, right = arr.length - 1) {
   if (left >= right) return;
   const pivot = arr[Math.floor((left + right) / 2)];
   let i = left, j = right;
-  
+
   while (i <= j) {
     while (arr[i] < pivot) i++;
     while (arr[j] > pivot) j--;
@@ -117,7 +113,7 @@ async function mergeSort(arr, start = 0, end = arr.length - 1) {
   const mid = Math.floor((start + end) / 2);
   await mergeSort(arr, start, mid);
   await mergeSort(arr, mid + 1, end);
-  
+
   let i = start, j = mid + 1;
   const temp = [];
   while (i <= mid && j <= end) {
@@ -126,7 +122,7 @@ async function mergeSort(arr, start = 0, end = arr.length - 1) {
   }
   while (i <= mid) temp.push(arr[i++]);
   while (j <= end) temp.push(arr[j++]);
-  
+
   for (let k = 0; k < temp.length; k++) {
     arr[start + k] = temp[k];
     drawArray([start + k]);
@@ -145,15 +141,13 @@ document.querySelector('#controls').appendChild(speedControl);
 
 // 添加默认初始化
 function setAlgorithm(algorithm) {
-  document.querySelectorAll('#controls button').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`button[onclick*="${algorithm}"]`).classList.add('active');
   currentAlgorithm = algorithm;
   generateNewArray();
 }
 
 async function shellSort(arr) {
   let n = arr.length;
-  for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2)) {
+  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
     for (let i = gap; i < n; i++) {
       let temp = arr[i];
       let j;
