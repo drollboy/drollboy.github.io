@@ -1,27 +1,121 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <title>排序算法可视化</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <div id="controls">
-      <select id="algorithmSelect" onchange="generateNewArray()">
-        <option value="bubble">冒泡排序</option>
-        <option value="quick">快速排序</option>
-        <option value="selection">选择排序</option>
-        <option value="insertion">插入排序</option>
-        <option value="merge">归并排序</option>
-        <option value="shell">希尔排序</option>
-        <option value="heap">堆排序</option>
-      </select>
-      <button id="startBtn" onclick="initSort(document.getElementById('algorithmSelect').value)">开始排序</button>
-      <button onclick="generateNewArray()">生成新数组</button>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAMP!!!</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 600px;
+      }
+      h1 {
+        color: #2c3e50;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #34495e;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #7f8c8d;
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+      .btn {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        padding: 12px 25px;
+        text-decoration: none;
+        border-radius: 25px;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #2980b9;
+      }
+      /* 添加媒体查询以适配移动端 */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px; /* 减少内边距 */
+          width: 85%; /* 增加容器宽度 */
+        }
+        h1 {
+          font-size: 2em; /* 减小标题字体大小 */
+        }
+        h2 {
+          font-size: 1.3em; /* 减小副标题字体大小 */
+        }
+        p {
+          font-size: 1em; /* 减小段落字体大小 */
+        }
+        .btn {
+          font-size: 1em; /* 减小按钮字体大小 */
+          padding: 10px 20px; /* 减小按钮内边距 */
+        }
+      }
+      /* 樱花样式 */
+      .sakura {
+        position: fixed; /* 修改为 fixed 定位，确保樱花在视口内 */
+        width: 10px;
+        height: 10px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="pink"/></svg>');
+        background-size: cover;
+        pointer-events: none;
+        animation: fall 10s linear infinite;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>welcome to Drollboy's blog</h1>
+      <h2>IP: 120.79.166.48</h2>
+      <p>在这里，我将分享我的技术见解、生活感悟和更多精彩内容。</p>
+      <a href="http://120.79.166.48" class="btn">开始探索</a>
     </div>
-    <canvas id="visualization"></canvas>
-  </div>
-  <script src="script.js"></script>
-</body>
+    <script>
+      function createSakura() {
+        const sakura = document.createElement('div');
+        sakura.classList.add('sakura');
+        sakura.style.left = Math.random() * 100 + 'vw';
+        sakura.style.animationDuration = Math.random() * 5 + 5 + 's';
+        document.body.appendChild(sakura);
+
+        setTimeout(() => {
+          sakura.remove();
+        }, 10000);
+      }
+
+      setInterval(createSakura, 500);
+    </script>
+  </body>
 </html>
