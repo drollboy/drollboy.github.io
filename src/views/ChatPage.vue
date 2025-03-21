@@ -23,7 +23,7 @@
         <div class="msg-item-content">
           <div class="msg-info">
             <span v-if="message.senderId !== userId">{{ message.senderName }}</span>&nbsp;
-            <span>{{ message.showSenderTime }}</span>
+            <span>{{ message.senderTime }}</span>
           </div>
           <p class="msg-text">{{ message.text }}</p>
         </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import io from 'socket.io-client';
 const socket = io('http://120.79.166.48:3000');
 
@@ -92,12 +92,18 @@ onMounted(() => {
   saveUserInfo();
   socket.on('connect', () => {
     console.log('Connected to server');
+    socket.on('allMessages', (messageList) => {
+      messages.value = messageList;
+      nextTick(() => {
+        scrollToBottom(); 
+      })
+    });
   });
   socket.on('message', (message) => {
-    const date = new Date(message.senderTime);
-    message.showSenderTime = `${date.getHours()}:${date.getMinutes()}`;
     messages.value.push(message);
-    scrollToBottom();
+    nextTick(() => {
+      scrollToBottom();
+    })
   });
   socket.on('disconnect', () => {
     console.log('Disconnected from server');
@@ -114,7 +120,8 @@ const sendMessage = () => {
       text: newMessage.value,
       senderId: userId.value,
       senderName: userName.value,
-      senderTime: new Date().toLocaleString()
+      senderTime: new Date().toLocaleTimeString(),
+      senderDateTime: new Date().toLocaleString(),
     };
     socket.emit('message', message);
     newMessage.value = '';
