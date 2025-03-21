@@ -43,7 +43,7 @@ const socket = io('http://120.79.166.48:3000');
 
 // 生成随机 ID
 const generateRandomId = () => {
-  return Math.random().toString(36).substr(2, 9);
+  return Math.random().toString(36).slice(2, 11); // 使用 slice 替代 substr
 };
 // 生成随机用户名
 const generateRandomName = () => {
