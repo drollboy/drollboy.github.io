@@ -1,78 +1,13 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>待开发，敬请期待</title>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f4f4f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
-      .container {
-        text-align: center;
-      }
-      h1 {
-        color: #333;
-        font-size: 3em;
-        margin-bottom: 0.5em;
-      }
-      p {
-        color: #666;
-        font-size: 1.2em;
-        margin-bottom: 2em;
-      }
-      .progress-bar {
-        width: 300px;
-        height: 20px;
-        background-color: #e0e0e0;
-        border-radius: 10px;
-        margin: 0 auto;
-        overflow: hidden;
-      }
-      .progress {
-        height: 100%;
-        width: 70%; /* 可根据实际进度调整 */
-        background-color: #007bff;
-        border-radius: 10px;
-        transition: width 0.5s ease-in-out;
-      }
-      .copylight {
-        margin-top: 2em;
-        font-size: 0.8em;
-        color: #888;
-      }
-      /* 新增链接样式 */
-      .discussion-link {
-        display: inline-block;
-        margin-top: 1.5em;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-      }
-      .discussion-link:hover {
-        background-color: #0056b3;
-      }
-    </style>
+    <title>Vite + Vue</title>
   </head>
   <body>
-    <div class="container">
-	<h1>😊开发中...</h1>
-      <p>该页面开发者正在全力开发中，即将精彩上线！</p>
-      <div class="progress-bar">
-        <div class="progress"></div>
-      </div>
-      <!-- 修改链接文字并应用新样式 -->
-      <a href="http://120.79.166.48:3000" target="_blank" class="discussion-link">去讨论</a>
-      <div class="copylight">@drollboy ✉️ <a class="copylight" href="mailto:drollboy@qq.com">drollboy@qq.com</a></div>
-    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
