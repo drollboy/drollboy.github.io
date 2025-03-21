@@ -1,0 +1,31 @@
+name: 部署vite项目
+
+on:
+  push:
+    branches: [main] # 监听 main 分支的推送
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist     # 构建后的目录
+          publish_branch: gh-pages # 目标分支
+          force_orphan: true       # 强制清空目标分支历史（仅保留最新构建）
