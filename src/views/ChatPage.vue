@@ -39,7 +39,7 @@
 <script setup>
 import { nextTick, onMounted, ref } from 'vue';
 import io from 'socket.io-client';
-const socket = io('http://120.79.166.48:3000');
+const socket = io('https://120.79.166.48:3000');
 
 // 生成随机 ID
 const generateRandomId = () => {
