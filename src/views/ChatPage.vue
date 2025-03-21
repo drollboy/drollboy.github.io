@@ -13,17 +13,17 @@
           <i class="fas fa-times"></i>
         </span>
         <h2>修改用户名</h2>
-        <input v-model="newUserName" placeholder="输入新的用户名">
+        <input v-model="newUserName" placeholder="输入新的用户名" @keyup.enter="saveUserName">
         <button @click="saveUserName">保存</button>
       </div>
     </div>
     <div class="msgs-list">
       <div v-for="message in messages" :key="message.id"
         :class="{ 'msg-item': true, 'self-msg': message.senderId === userId }">
-        <div>
+        <div class="msg-item-content">
           <div class="msg-info">
             <span v-if="message.senderId !== userId">{{ message.senderName }}</span>&nbsp;
-            <span>{{ message.senderTime }}</span>
+            <span>{{ message.showSenderTime }}</span>
           </div>
           <p class="msg-text">{{ message.text }}</p>
         </div>
@@ -82,14 +82,22 @@ const saveUserName = () => {
   }
 };
 
+// 接收到消息滚动到最底部
+const scrollToBottom = () => {
+  const msgsList = document.querySelector('.msgs-list');
+  msgsList.scrollTop = msgsList.scrollHeight - msgsList.clientHeight;
+};
+
 onMounted(() => {
   saveUserInfo();
   socket.on('connect', () => {
     console.log('Connected to server');
   });
   socket.on('message', (message) => {
-    console.log('Received message:', message);
+    const date = new Date(message.senderTime);
+    message.showSenderTime = `${date.getHours()}:${date.getMinutes()}`;
     messages.value.push(message);
+    scrollToBottom();
   });
   socket.on('disconnect', () => {
     console.log('Disconnected from server');
@@ -100,13 +108,13 @@ const messages = ref([]);
 const newMessage = ref('');
 
 const sendMessage = () => {
-  if (newMessage.value) {
+  if (newMessage.value.trim() !== '') {
     const message = {
       id: Date.now(),
       text: newMessage.value,
       senderId: userId.value,
       senderName: userName.value,
-      senderTime: new Date().toLocaleTimeString()
+      senderTime: new Date().toLocaleString()
     };
     socket.emit('message', message);
     newMessage.value = '';
@@ -146,6 +154,7 @@ const sendMessage = () => {
   padding: 10px;
   overflow-y: auto;
   background-color: #f3eaea;
+  scroll-behavior: smooth;
 }
 
 .msg-item {
@@ -153,13 +162,16 @@ const sendMessage = () => {
   display: flex;
   margin-bottom: 10px;
 }
-
+.msg-item-content {
+  max-width: 80%;
+}
 /* 自己的消息靠右显示 */
 .msg-item.self-msg {
   text-align: right;
   flex-direction: row-reverse;
 }
 .msg-item.self-msg .msg-text {
+  text-align: left;
   background-color: #a4e4aa;
 }
 .msg-info {
