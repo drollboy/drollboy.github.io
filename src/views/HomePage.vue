@@ -42,6 +42,11 @@
         </transition>
       </div>
     </div>
+    <!-- 添加网站链接 -->
+    <div class="website-link">
+      avatar's site: 
+      <a href="https://doet.top" target="_blank">doet.top</a>
+    </div>
   </div>
 </template>
 
@@ -76,7 +81,7 @@
         index = 0;
         displayedText.value = '';
       }
-    }, 150); // 每个字符显示间隔 150 毫秒
+    }, 300); // 每个字符显示间隔 150 毫秒
   });
 </script>
 
@@ -88,16 +93,17 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  /* 更亮的背景渐变 */
-  background: linear-gradient(135deg, #e0f7fa, #b2ebf2, #80deea);
+  /* 调整背景渐变颜色，增加对比度 */
+  background: linear-gradient(135deg, #a7ffeb, #40c4ff, #00b0ff);
 }
 
 .particles-background {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 10%, transparent 100%);
-  /* 添加背景动画，让粒子背景动起来 */
-  animation: particles-move 10s linear infinite;
+  /* 增加粒子背景密度 */
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 5%, transparent 100%);
+  /* 加快粒子背景动画速度 */
+  animation: particles-move 5s linear infinite;
 }
 
 @keyframes particles-move {
@@ -177,7 +183,7 @@
 
 .highlight {
   color: #ff5722;
-  text-decoration: underline wavy;
+  /* text-decoration: underline wavy; */
   /* 给高亮文字添加光晕效果 */
   text-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
 }
@@ -273,5 +279,24 @@
   100% {
     transform: scale(1);
   }
+}
+.website-link {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.website-link a {
+  color: #333;
+  text-decoration: none;
+}
+
+.website-link a:hover {
+  color: #ff5722;
 }
 </style>
