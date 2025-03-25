@@ -4,10 +4,10 @@ import HomePage from '../views/HomePage.vue';
 import ChatPage from '../views/ChatPage.vue';
 const routes = [
   { path: '/', component: HomePage },
-  { path: '/chat', component: ChatPage },
+  // { path: '/chat', component: ChatPage },
 ];
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 export default router;
